@@ -1,0 +1,57 @@
+Versioning REST API.
+
+Let's say
+1] You have hundreds of consumers.
+2] You need to implement a breaking change.
+Example :- Split name into firstName and lastName.
+
+If you want to split name into firstName and lastName , but you want the
+consumers see the entire name , you don't have to change the structure.
+
+There is a better way to deal with it.
+
+Whenever I make an API change I should not force my customers also to
+make an immediate change.
+
+Whenever we have breaking changes to implement , we would version our
+REST API's.
+
+Solution : Versioning REST API.
+Variety of options :
+1] URL ,
+2] Request Parameter ,
+3] Header
+4] Media Type.
+
+The second type of Versioning REST API - Options is
+
+Request Parameter versioning - Amazon
+
+Eg :-
+http://localhost:8080/person?version=1
+http://localhost:8080/person?version=2
+
+The third type of Versioning REST API - Options is
+(Custom) headers versioning - Microsoft.
+
+SAME-URL headers = [X-API-VERSION=1]
+SAME-URL headers = [X-API-VERSION=2]
+
+The fourth type of Versioning REST API - Options is
+
+Media Type Versioning (a.k.a "content negotiation" or "accept header") - Github
+
+SAME-URL produces = application/vnd.company.app-v1+json
+SAME-URL produces = application/vnd.company.app-v2+json
+
+Factors to consider while versioning your REST API - Factors.
+1] URI Pollution.
+2] Misuse of HTTP Headers.
+3] Caching
+4] Can we execute the request on the browser ?
+5] API Documentation
+
+Summary :- No Perfect Solution.
+Think about versioning even before you need it.
+One Enterprise - One Versioning Approach across multiple different
+approaches / multiple applications.

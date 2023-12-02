@@ -1,0 +1,166 @@
+We are going to create REST API for social media application.
+
+Users REST API
+Retrieve All Users
+1] Get /users
+Create a User
+2] Post /users
+Retrieve One User
+3] GET /users/{id} --> /users/1.
+Delete a User
+4] DELETE /users/{id} --> /users/1.
+
+Posts REST API
+Retrieve all posts for a user
+1] Get /users/{id}/posts
+Create a post for a User
+2] Post /users/{id}/posts
+Retrieve details of a post
+3] GET /users/{id}/posts/{post_id}
+
+
+REST API Documentation :
+Your REST API consumers need to understand your
+REST API :
+1] Resources
+2] Actions
+3] Request / Response Structure (Constraints / Validations)
+
+Challenges
+Accuracy : How do you ensure that your documentation is upto
+data and correct ?
+Consistency : You might have 100s of REST API in an enterprise.
+How do you ensure consistency ?
+
+Options :-
+1] Manually Maintain Documentation.
+   Additional effort to keep it in sync with code.
+2] Generate Documentation from code itself.
+
+Two tools commonly used to generate documentation from code
+itself are :- Swagger and OpenAPI.
+
+OpenAI specification was created as a standard for
+documenting your REST API based on Swagger specification.
+It is a standard language-agnostic interface.
+
+Swagger API provides the tools to visualize and consume your REST
+API.
+Swagger UI : Visualize and interact with your REST API.
+
+springdoc-openapi java library helps to automate the generation of
+API documentation for spring boot projects.
+
+
+Content Negotiation
+Same Resource :- Same URI
+However Different Representations are possible
+Example : Different Content Type - XML or JSON or ...
+Example : Different Language - English or Dutch.
+
+How can a consumer tell the REST API provider what they
+want ?
+Content Negotiation
+Example : Accept Header (MIME Types application/xml ,
+application/json,...)
+Example : Accept-Language header (en,el,fr)
+
+This is achieve using the request headers.
+Adding XML representations to our headers.
+
+Internationalization - i18n. (It has 18 characters.)
+Your REST API might have consumers from around the world.
+How to customize your content for users around the world , this is
+where internationalization comes into picture.
+
+HTTP Request Header :- Accept-Language is used.
+Accept-Language - indicates natural language and locale that the
+consumer prefers.
+Eg :- en - English , nl - Dutch , fr - french
+
+This whole internationalization is based on the accept
+language header.
+
+HATEOAS :
+
+Hypermedia as the Engine of Application State (HATEOAS)
+Whenever a user goes to any website , the users can See Data
+and Performs Actions.
+
+How about enhancing your REST API to tell consumers how
+to perform subsequent actions ?
+This is where HATEOAS comes into play.
+
+Implementation Options :
+1] Custom Format and Implementation.
+   Difficult to maintain
+2] Use Standard Implementation
+   HAL (JSON HyperText Application Language) : Simple Format that
+   gives a consistent and easy way to hyperlink between resources in
+   your API.
+   (This implementation is accepted by all applications).
+
+Two Concepts to be understood EntityModel and WebMvcLinkBuilder.
+
+Customizing REST API Responses - Filtering and more ...
+Serialization : Convert object to stream (example : JSON)
+Most popular JSON serialization in Java is Jackson.
+
+How about customizing the REST API response returned by
+Jackson framework ?
+Customize field names in response
+  @JSONProperty
+Return only selected fields
+ 1] Filtering
+ 2] Example : Filter out Passwords
+
+Two Types :
+Static Filtering : Same Filtering for a bean across different REST API.
+  @JsonIgnoreProperties , @JsonIgnore
+Dynamic Filtering : Customize filtering for a bean for specific REST API.
+  @JsonFilter with FilterProvider.
+
+Spring Boot Actuator : Provides Spring Boot's production-ready
+features.
+Monitor and Manage your application in your production
+Spring Boot Starter Actuator : Starter to add Spring Boot Actuator
+to your application.
+spring-boot-starter-actuator
+
+It only exposes the health of the application by default.
+
+Provides a number of endpoints :
+beans - Complete list of Spring Beans in your app
+health - Application health information
+metrics - Details around Request mro Mapping and a lot more.
+
+Go to the local host 8080 to start the actuator.
+http://localhost:8080/actuator/beans -->
+Gives information about each bean in the application.
+
+Exploring REST API using HAL explorer.
+Simple format that gives a consistent and easy way to hyperlink
+between resources in your API.
+It is an API explorer for RESTful HyperMedia APIs using HAL.
+Enable your non-technical teams to play with APIs.
+
+3] Spring Boot HAL Explorer.
+Auto-configures HAL explorer for Spring Boot Projects.
+spring-data-rest-hal-explorer.
+
+Connecting our Spring Boot Application to the Database using
+JPA and Hibernate. (H2 --> MySQL)
+
+When we are working with JPA and Hibernate
+Use Annotation such as Entity , Id , etc.
+
+After connecting the JPA / MySQL , we want to create
+One-to-One and Many-to-one relationships between
+User and Post.
+
+One User --> Many Posts.
+One Post --> One User.
+
+Creating REST API for posts as well.
+
+Now we will connecting MySQL Database.
