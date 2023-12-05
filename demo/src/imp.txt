@@ -164,3 +164,24 @@ One Post --> One User.
 Creating REST API for posts as well.
 
 Now we will connecting MySQL Database.
+
+We want security and authentication into the API.
+
+Spring Security :-
+The only way to access the REST API after adding Spring Security
+is Passing the credentials of the user.
+
+For every type of rest api call developed
+in the project , we need to pass in the credentials meaning
+adding security to all of them.
+
+1] Spring Security will firstly intercept our request and execute
+a series of chains called filter chains.
+Series of checks done in filter chains.
+
+1] All requests should be authenticated.
+2] If a request is not authenticated , a web page is shown.
+3] CSRF --> POST , PUT.
+
+We will create a Configuration file , where we will create
+Bean --> FilterChain.

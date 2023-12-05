@@ -1,0 +1,4 @@
+Microservices --> 3 things to know
+REST
+Small Well Chosen deployable units
+Cloud Based.
