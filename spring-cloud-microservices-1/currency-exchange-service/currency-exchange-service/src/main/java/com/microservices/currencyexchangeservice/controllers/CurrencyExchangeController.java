@@ -3,6 +3,8 @@ package com.microservices.currencyexchangeservice.controllers;
 
 import com.microservices.currencyexchangeservice.entites.CurrencyExchange;
 import com.microservices.currencyexchangeservice.repository.CurrencyExchangeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,7 @@ import java.math.BigDecimal;
 
 @RestController
 public class CurrencyExchangeController {
-
+    private Logger logger = LoggerFactory.getLogger(CurrencyExchangeController.class);
     @Autowired
     private CurrencyExchangeRepository repository;
     // We get the value of the port by the inbuilt environment class.
@@ -22,6 +24,8 @@ public class CurrencyExchangeController {
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
     public CurrencyExchange retrieveExchangeValue(@PathVariable String from , @PathVariable String to) {
 //        CurrencyExchange curr =  new CurrencyExchange(10L,"USD","IND", BigDecimal.valueOf(50));
+
+        logger.info("retrieveExchange called with {} to {}" , from  ,to);
 
         CurrencyExchange curr = repository.findByFromAndTo(from,to);
         if(curr == null) {

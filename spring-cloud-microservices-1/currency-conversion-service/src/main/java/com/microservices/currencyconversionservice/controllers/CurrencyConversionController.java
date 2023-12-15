@@ -4,6 +4,9 @@ package com.microservices.currencyconversionservice.controllers;
 import com.microservices.currencyconversionservice.entites.CurrencyConversion;
 import com.microservices.currencyconversionservice.proxy.CurrencyExchangeProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +16,22 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+@Configuration(proxyBeanMethods = false)
+class RestTemplateConfiguration {
+    @Bean
+    RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
+}
+
 @RestController
 public class CurrencyConversionController {
 
     @Autowired
     private CurrencyExchangeProxy proxy;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     // http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10.
     @GetMapping("/currency-conversion/from/{currency_from}/to/{currency_to}/quantity/{quantity}")
@@ -29,7 +43,8 @@ public class CurrencyConversionController {
         uriVariables.put("from" , currency_from);
         uriVariables.put("to" , currency_to);
 
-        ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity
+//        ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity
+        ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity
                 ("http://localhost:8000/currency-exchange/from/{from}/to/{to}",
                         CurrencyConversion.class, uriVariables);
         // The response is shown after getting it from currency conversion.
