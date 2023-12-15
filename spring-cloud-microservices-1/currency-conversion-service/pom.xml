@@ -103,6 +103,13 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+
+					<!-- Adding Configuration for Pushing the microservice to the docker-->
+					<image>
+                        <!-- Give a container image name -->
+						<name>salman/mmv2-${project.artifactId}:${project.version}</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>
 			</plugin>
 		</plugins>
